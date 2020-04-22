@@ -43,10 +43,7 @@ export function* saveTOUSaga() {
 
     axios.post(url, {
       tou: {
-        id: task.taskID,
-        group: task.groupID,
-        isComplete: task.isComplete,
-        name: task.name
+        lp: lp.lp
       }
     }, options);
   }
