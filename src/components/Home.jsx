@@ -1,18 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import * as mutations from "../store/mutations";
-import { v4 as uuidv4 } from 'uuid';
-
-
-const parseOptions = {
-  header: true,
-  dynamicTyping: true,
-  skipEmptyLines: true,
-  transformHeader: header =>
-    header
-      .toLowerCase()
-      .replace(/\W/g, '_')
-}
 
 const HomeComponent = ({ lp, handleFileData }) => {
   return (
