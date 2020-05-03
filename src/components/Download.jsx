@@ -1,9 +1,7 @@
 import React from "react";
-import { CSVLink, CSVDownload } from "react-csv";
+import { CSVLink } from "react-csv";
 import { connect } from "react-redux";
 import * as mutations from "../store/mutations";
-import { v4 as uuidv4 } from 'uuid';
-import axios from 'axios';
 
 const DownloadComponent = ({ filter, setFilterDate, setFilterMeter, setFilterDataType, setFilterData, loadData, lpSummary }) => {
   return (
@@ -61,50 +59,10 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  // if (!state.lpSummary) {
-  // dispatch(mutations.requestLPSummary());
-  // }
-
   return {
     loadData() {
       dispatch(mutations.requestLPSummary());
     }
-
-    // setFilterDate(id) {
-    //   dispatch(requestTaskCreation(id));
-    // },
-    // setFilterMeter(id) {
-    //   dispatch(requestTaskCreation(id));
-    // },
-    // setFilterDataType(id) {
-    //   dispatch(requestTaskCreation(id));
-    // },
-    // setFilterData(id) {
-    //   dispatch(requestTaskCreation(id));
-    // }
-    // setFilterDate, setFilterMeter, setFilterDataType, setFilterData
-    // handleFileData(data) {
-    //   console.log(JSON.stringify(data));
-    //   const cleanData = data.map((val, index) => {
-    //     return {
-    //       id: uuidv4(),
-    //       meterPointCode: val.meterpoint_code,
-    //       serialNumber: val.serial_number,
-    //       plantCode: val.plant_code,
-    //       dateTime: val.date_time,
-    //       dataType: val.data_type,
-    //       dataValue: val.data_value,
-    //       units: val.units,
-    //       status: val.status
-    //     };
-    //   })
-
-    //   dispatch(mutations.requestLPCreation(cleanData));
-    // },
-    // createNewTask(id) {
-    //   console.log("Creating file contents", id);
-    //   dispatch(requestTaskCreation(id));
-    // }
   }
 };
 

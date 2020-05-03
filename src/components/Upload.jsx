@@ -2,6 +2,8 @@ import React from "react";
 import CSVReader from 'react-csv-reader'
 import { connect } from "react-redux";
 import * as mutations from "../store/mutations";
+import { FileSummary } from "./FileSummary";
+import { FileDetails } from "./FileDetails";
 import { v4 as uuidv4 } from 'uuid';
 
 const parseOptions = {
@@ -14,10 +16,19 @@ const parseOptions = {
       .replace(/\W/g, '_')
 }
 
-const UploadComponent = ({ lp, lpSummary, handleFileData }) => {
+const UploadComponent = ({ lp, lpSummary, handleFileData, onSelectChange }) => {
   return (
     <div className="card p-3 col-12">
-      <h2>Upload file</h2>
+      <div class="btn-group">
+        <div>File type:</div>
+        <div>
+          <select class="form-control" onChange={onSelectChange} >
+            <option value="lp" selected>LP</option>
+            <option value="tou">TOU</option>
+          </select>
+        </div>
+      </div>
+      <h2>Upload file1</h2>
 
       <CSVReader
         cssClass=""
@@ -33,51 +44,9 @@ const UploadComponent = ({ lp, lpSummary, handleFileData }) => {
       <a href="/" target="_top">Back</a>
       <br />
       <div>
-        <div>{lp.length > 0 ? 'File uploaded' : ''}
-        <div class="table-responsive-sm">
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">File Name</th>
-                <th scope="col">Min</th>
-                <th scope="col">Max</th>
-                <th scope="col">Median</th>
-              </tr>
-            </thead>
-            <tbody>
-                <tr>
-                  <td>{lpSummary?.fileName}</td>
-                  <td>{lpSummary?.min}</td>
-                  <td>{lpSummary?.max}</td>
-                  <td>{lpSummary?.median}</td>
-                </tr>
-            </tbody>
-          </table>
-        </div>
-        </div>
+        <FileSummary lpSummary = {lpSummary}></FileSummary>
         <br />
-        <div class="table-responsive-sm">
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Meter</th>
-                <th scope="col">Date Time</th>
-                <th scope="col">Value</th>
-                <th scope="col">Data Type</th>
-              </tr>
-            </thead>
-            <tbody>
-              {lp.map((val, index) => (
-                <tr key={index}>
-                  <td>{val.meterPointCode}</td>
-                  <td>{val.dateTime}</td>
-                  <td>{val.dataValue}</td>
-                  <td>{val.dataType}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <FileDetails lp = {lp}></FileDetails>
       </div>
     </div>
   );
@@ -130,6 +99,9 @@ const mapDispatchToProps = (dispatch) => {
       console.log(summaryData);
       dispatch(mutations.requestLPCreation(cleanData));
       dispatch(mutations.requestLPSummaryCreation(summaryData));
+    },
+    onSelectChange(event) {
+      console.log(event);
     }
   }
 };
