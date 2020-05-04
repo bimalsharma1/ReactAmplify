@@ -13,8 +13,9 @@ export const store = createStore(
             switch (action.type) {
                 case mutations.REQUEST_LP_CREATION:
                     return action.lp;
+                default:
+                    return lps;
             }
-            return lps;
         },
         lpSummary(lpSummary = [], action) {
             switch (action.type) {
@@ -22,11 +23,12 @@ export const store = createStore(
                     return action.lps ? action.lps : null;
                 case mutations.SET_LP_SUMMARY:
                     return action.lps ? action.lps : null;
+                default:
+                    return lpSummary;
             }
-            return lpSummary;
         },
         session(userSession = [] || {}, action) {
-            let { type, authenticated, session } = action;
+            let { type, authenticated } = action;
             switch (type) {
                 case mutations.SET_STATE:
                     return { ...userSession, id: action.state.session.id };
@@ -68,8 +70,9 @@ export const store = createStore(
                             { ...task, group: action.groupID } :
                             task;
                     });
+                default:
+                    return tasks;
             }
-            return tasks;
         },
         comments(comments = []) {
             return comments;
@@ -78,8 +81,9 @@ export const store = createStore(
             switch (action.type) {
                 case mutations.SET_STATE:
                     return action.state.groups;
+                default:
+                    return groups;
             }
-            return groups;
         },
         users(users = []) {
             return users;

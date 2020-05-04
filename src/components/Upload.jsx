@@ -19,11 +19,11 @@ const parseOptions = {
 const UploadComponent = ({ lp, lpSummary, handleFileData, onSelectChange }) => {
   return (
     <div className="card p-3 col-12">
-      <div class="btn-group">
+      <div>
         <div>File type:</div>
         <div>
           <select class="form-control" onChange={onSelectChange} >
-            <option value="lp" selected>LP</option>
+            <option value="lp">LP</option>
             <option value="tou">TOU</option>
           </select>
         </div>
@@ -53,8 +53,6 @@ const UploadComponent = ({ lp, lpSummary, handleFileData, onSelectChange }) => {
 };
 
 const mapStateToProps = (state, ownProps) => {
-  console.log(JSON.stringify(state));
-  console.log(JSON.stringify(ownProps));
   return {
     lp: state.lp,
     lpSummary: state.lpSummary
@@ -96,12 +94,11 @@ const mapDispatchToProps = (dispatch) => {
         median: median(dataValues)
       }
 
-      console.log(summaryData);
       dispatch(mutations.requestLPCreation(cleanData));
       dispatch(mutations.requestLPSummaryCreation(summaryData));
     },
     onSelectChange(event) {
-      console.log(event);
+      console.log(event.target.value);
     }
   }
 };
